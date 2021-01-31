@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'quote.dart';
+import 'quotes_card.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -14,10 +15,17 @@ class QuoteList extends StatefulWidget {
 
 class _QuoteListState extends State<QuoteList> {
   List<Quote> quotes = [
-    Quote(author: 'Deepak', text: 'First Quote'),
-    Quote(author: 'Defwfrne',text: 'fwjfnwefn'),
-    Quote(author: 'edhwfw',text: 'efwenf')
+    Quote(
+        author: "Stephen King",
+        text:
+            "If you don't have time to read, you don't have the time (or the tools) to write. Simple as that."),
+    Quote(author: 'Mark Twain', text: "Substitute 'damn' every time you're inclined to write 'very;' your editor will delete it and the writing will be just as it should be."),
+    Quote(author: 'Toni Morrison', text: "If there's a book that you want to read, but it hasn't been written yet, then you must write it.")
   ];
+  // Widget quoteTemplate(quote) {
+  //   return QuoteCard(quote: quote);
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,9 +38,17 @@ class _QuoteListState extends State<QuoteList> {
         body: Column(
           children: quotes.map(
             (quote) {
-              return Text(quote);
+              return QuoteCard(
+                quote: quote,
+                delete: () {
+                  setState(() {
+                    quotes.remove(quote);
+                  });
+                }
+                );
             },
           ).toList(),
         ));
   }
 }
+
